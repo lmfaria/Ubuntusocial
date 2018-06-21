@@ -19,6 +19,8 @@
 </head>
 
 <body>
+<!-- Nav bar karalhuda -->
+
 	<nav class="navbar navbar-default navbar-fixed-top ">
 		<div class="container">
 			<div class="navbar-header" ">
@@ -37,36 +39,44 @@
 					
 				</div>-->
 
-
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-
-						<li>
-							<form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
-								<div class="input-group " style="margin-left: 20px; margin-right: 20px; ">
-									<input type="search" class="form-control" size="50%" placeholder="Procurando a instituição ideal para doar ? " required>
+<!-- Nova bara de pesquisa -->
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">											
+					<li><form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
+							<div class="input-group" style="margin-left: 15px; margin-right: 15px;">
+								<input type="search" name="pesquisa" class="form-control" size="45%" placeholder="Procurando a instituição ideal para doar ?" required>
 									<div class="input-group-btn">
-										<button type="button" class="btn btn-default" id="teste"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
+										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></button>
+										<!--<form action="pesquisa.php" method="post">-->
+											<ul class="dropdown-menu dropdown-menu-right">
+												<div class="radio" style="padding-left: 10px; padding-right: 10px">
+													<li><label><input type="radio" name="filtro" value="tudo" checked="checked">Tudo</label>
+													<li><label><input type="radio" name="filtro" value="nome">Nome</label>
+													<li><label><input type="radio" name="filtro" value="endereco">Local</label>
+													<li><label><input type="radio" name="filtro" value="doacoes">Tipo de doação</label>
+													<li><label><input type="radio" name="filtro" value="segmento">Segmento</label>
+												</div>
+											</ul>  
 									</div>
-								</div>
-							</form>
-						</li>
+							</div>
+					</li></form>
+<!-- fim da barra de pesquisa-->				
 
-						<li><a href="#home">Ínicio</a></li>
-						<li><a href="#portfolio">Projetos</a></li>
-						<li><a href="#pricing">Quem Somos</a></li>
+			<li><a href="#home">Ínicio</a></li>
+			<li><a href="#portfolio">Projetos</a></li>
+			<li><a href="#pricing">Quem Somos</a></li>
+<!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
+			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
+			<li id="menulogout" style="display:none;"><a href="logout.php">Sair</a></li>
+<!-- id para menulogin e menucadastro ps:sem eles vai dar merda -->
 						<!--Código para a parte de login -->
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Login
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" style="width: 300px">
-
-
-								<!--Div do formulário -->
-
-								<div class='login' style="max-width: 100%; padding: 5%">
-									<fieldset>
+			<li id="menulogin" class="dropdown">
+				<a  class="dropdown-toggle" data-toggle="dropdown" href="#">Login<span class="caret"></span></a>
+					<ul class="dropdown-menu" style="width: 300px">
+						<!--Div do formulário -->
+							<div class='login' style="max-width: 100%; padding: 5%">
+								<fieldset>
 										<!--Formulario com metodo post e a pagina para redirecionar -->
 										<form method="post" action="verif.php" id="formlogin" name="formlogin" onsubmit="return validaForm()">
 											<li>
@@ -90,119 +100,106 @@
 												<br>
 												<!--Alerta de erro -->
 												<div id="erro" class="alert alert-danger" role="alert"></div>
-											</li>
-											<!--Um br aqui ou não? -->										
+											</li>										
 											<li>
-												<!--Botao que chama a função de validação -->
-												<div><input class="btn btn-primary" type='submit' name='botao' value='Logar'></div>
+												<!--botão que limpa os inputs. Não usei função, ele limpa por html5 não sei se funciona no resto -->
+												<div>
+													<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+													<input class="btn btn-primary" type='submit' name='botao' value='Entrar' >
+												</div>
 											</li>
-										</form>
-										<!--Essa parte pode ser implementada de maneira melhor mas atualmente é o fim do formulário -->							
-										<!--
-										<br>
-										<li>
-											Ainda não é cadastrado?
-											<br>
-											<br>
-										</li>
-										<li>
-											<div><button class="btn btn-default" onclick="document.getElementById('cad').style.display='block';">Cadastro</button></div>
-										</li>	-->											
+										</form>										
 									</fieldset>
 
-								</div>
-							</ul></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastro
-									<span class="caret"></span>
-								</a>
-								<ul id="cad" class="dropdown-menu" style="width: 400px">
-
-
-
-									<!--Div do formulário -->
-
-									<div class='login' style="max-width: 100%; padding: 5%">
-										<fieldset>							
-
-
-											<!--Formulario com metodo post e a pagina para redirecionar -->
-											<form method="post" action="cadastrando.php" id="formcad" name="formcad" onsubmit="return validaFormCad()"">
-												<h4>Preencha todos os Campos</h4>
-												<!--Inputs -->
-												<li>
-													Nome da Instituição
-												</li>
-												<li>													
-													<div class="input-group">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-home" style=""></i></span>
-														<input id="nomeinst" type="text" class="form-control" name="nomeinst" placeholder="Nome da Instituição" style="width:100%">
-													</div>
-												</li>
-												<li>
-													Telefone
-												</li>
-												<li>													
-													<div class="input-group">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt" style=""></i></span>
-														<input id="telefone" type="text" class="form-control" name="telefone" placeholder="Telefone" style="width:100%">
-													</div>
-												</li>
-												<li>
-													<li>
-														E-mail
-													</li>
-													<li>													
-														<div class="input-group">
-															<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" style=""></i></span>
-															<input id="email" type="text" class="form-control" name="email" placeholder="E-mail" style="width:100%">
-														</div>
-													</li>
-													<li>
-														<li>
-															Usuário
-														</li>
-														<li>													
-															<div class="input-group">
-																<span class="input-group-addon"><i class="glyphicon glyphicon-user" style=""></i></span>
-																<input id="usu" type="text" class="form-control" name="usu" placeholder="Usuário" style="width:100%">
-															</div>
-														</li>
-														<li>
-															Senha
-														</li>
-														<li>
-															<div class="input-group">
-																<span class="input-group-addon"><i class="glyphicon glyphicon-lock" style=""></i></span>
-																<input id="pass" type="text" class="form-control" name="pass" placeholder="senha" style="width:100%">
-															</div>
-															<br>
-
-															<!--Alerta de erro -->
-															<div id="erro1" class="alert alert-danger" role="alert"></div>
-														</li>
-														<!--Um br aqui ou não? -->										
-														<li>
-															<!--Botao que chama a função de validação -->
-															<div>
-																<input class="btn btn-danger" type='submit' name='botao' value='Limpar' onclick="return validaFormCad()">
-																<input class="btn btn-primary" type='submit' name='botao' value='Cadastrar' >
-															</div>
-														</li>
-
-													</fieldset>
-
-												</div>
-											</ul>
-										</li>
-
-									</ul>
-
-								</div>
-
 							</div>
+					</ul>
+			</li>
+			<li id="menucadastro" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastro<span class="caret"></span></a>
+					<ul id="cad" class="dropdown-menu" style="width: 400px">
+						<!--Div do formulário -->
+						<div class='login' style="max-width: 100%; padding: 5%">
+							<fieldset>	
+								<!--Formulario com metodo post e a pagina para redirecionar -->
+								<form method="post" action="cadastrando.php" id="formcad" name="formcad" onsubmit="return validaFormCad()"">
+								<h4>Preencha todos os Campos</h4>
+								<!--Inputs -->
+									<li>
+										Nome da Instituição
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-home" style=""></i></span>
+											<input id="nomeinst" type="text" class="form-control" name="nomeinst" placeholder="Nome da Instituição" style="width:100%">
+										</div>
+									</li>
+									<li>
+										Telefone
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt" style=""></i></span>
+											<input id="telefone" type="text" class="form-control" name="telefone" placeholder="(xx) xxxx - xxxx" style="width:100%">
+										</div>
+									</li>
+									<li>
+										E-mail
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" style=""></i></span>
+											<input id="email" type="text" class="form-control" name="email" placeholder="email@servidor.com" style="width:100%">
+										</div>
+									</li>
+									<li>
+										Usuário
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user" style=""></i></span>
+											<input id="usu" type="text" class="form-control" name="usu" placeholder="Usuário" style="width:100%">
+										</div>
+									</li>													
+									<li>
+										Senha
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-lock" style=""></i></span>
+											<input id="pass" type="text" class="form-control" name="pass" placeholder="Senha" style="width:100%">
+										</div>
+									</li>	
+									<li>
+										Confirme a senha
+									</li>
+									<li>
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-lock" style=""></i></span>
+											<input id="confirmpass" type="text" class="form-control" name="confirmpass" placeholder="Confirme a senha" style="width:100%">
+										</div>
+										<br>
+										<!--Alerta de erro -->
+										<div id="erro1" class="alert alert-danger" role="alert"></div>
+									</li>																
+									<li>
+										<!--Botao que chama a função de validação -->
+										<div>
+											<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+											<input class="btn btn-primary" type='submit' name='botao' value='Cadastrar' >
+										</div>
+									</li>
+								</form>
+							</fieldset>
+						</div>
+					</ul>
+				</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-						</nav>
+<!-- Fim da  Nav bar karalhuda -->
+
 
 <!--<div class="jumbotron text-center colorhead ">
 		<h1>Ubuntu Social</h1> 
@@ -346,15 +343,30 @@
 
 		<?php
 
+		//inicia sessão
+		if (!isset($_SESSION)) session_start();
+		// Verifica se não há a variável da sessão que identifica o usuário
+		if (isset($_SESSION["inst"])) 
+		{
+		//esconde login e cadastro e exibe logout
+		echo "<script>logon()</script>";
+		}
+		//se não há ninguém logado, destroi a sessao
+		if (!isset($_SESSION["inst"])) 
+		{
+      	//destroi sessão por segurança
+		session_destroy();
+		}
 
-			//$servername = "localhost";
-			//$username = "root";
-			//$password = "";
-			//$dbname = "ubuntusocial";
-		$servername = "177.52.161.146";
-		$username = "daniell2_lucas";
-		$password = "1ixHK6vi";
-		$dbname = "daniell2_ubuntusocial";
+
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "ubuntusocial";
+		//$servername = "177.52.161.146";
+		//$username = "daniell2_lucas";
+		//$password = "1ixHK6vi";
+		//$dbname = "daniell2_ubuntusocial";
 
 // Create connection
 		$conn = mysqli_connect($servername, $username, $password, $dbname);

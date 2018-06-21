@@ -128,6 +128,13 @@ function validaFormCad()
 		document.getElementById('pass').style.border="2px solid red";
 		counterro1+=1;
 	}
+	if (document.getElementById('pass').value != document.getElementById('confirmpass').value)
+	{
+		document.getElementById('erro1').innerHTML+="A confirmação de senha não confere <br>";
+		document.getElementById('erro1').style.display="block";
+		document.getElementById('confirmpass').style.border="2px solid red";
+		counterro1+=1;
+	}
 	if(counterro1>=1)
 	{
 		return false;
@@ -136,4 +143,12 @@ function validaFormCad()
 	{
 		return true;
 	}
+}
+
+function logon()
+{
+	document.getElementById('menulogin').style.display="none";
+	document.getElementById('menucadastro').style.display="none";
+	document.getElementById('menulogout').style.display="block";
+	document.getElementById('menuinstalt').style.display="block";
 }
