@@ -82,7 +82,7 @@ $select = mysql_select_db('ubuntusocial') or die (mysql_error());
 
 	$sql = mysql_query("INSERT INTO cadastro(nomedainstituicao, telefone, email, usu, pass) VALUES('$nome', '$telefone', '$email', '$usu', '$pass')");
 	echo "<center><h1>Cadastrado com sucesso<h1>";
-//echo "<script type="text/javascript"> setTimeout("window.location=index.php", 6000);</script>";
+    echo "<script type="text/javascript"> setTimeout("window.location='index.php'", 3000);</script>";
 
 	?>
 
