@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ubuntu Social</title>
-	<script type="text/javascript" src="scriptUbuntu.js"></script>
+	<script type="text/javascript" src="scriptUs.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
@@ -224,7 +224,9 @@
 			{
       		//destroi sessão por segurança
 			session_destroy();
-			}
+			}   			
+
+
 
 
 

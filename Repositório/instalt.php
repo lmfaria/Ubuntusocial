@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ubuntu Social</title>
-	<script type="text/javascript" src="scriptUS.js"></script>
+	<script type="text/javascript" src="scriptUs.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
@@ -285,11 +285,11 @@
 			if (!isset($_SESSION)) session_start();
 			// Verifica se não há a variável da sessão que identifica o usuário
 			if (!isset($_SESSION["inst"]))
-			 {
-      		// Destrói a sessão por segurança
-      		session_destroy();
+			{
       		// Redireciona o visitante de volta pro login
-      		header("Location: index.php"); exit;
+      		echo '<script type="text/javascript">window.location="index.php"</script>';
+      		//encerra todas as funçoes
+      		exit;
   			}
 			// Verifica se não há a variável da sessão que identifica o usuário
 			if (isset($_SESSION["inst"])) 
@@ -297,12 +297,6 @@
 			//esconde login e cadastro e exibe logout
 			echo "<script>logon()</script>";
 			}
-
-
-
-
-
-
 
 			$servername = "localhost";
 			$username = "root";
