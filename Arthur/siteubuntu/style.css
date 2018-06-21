@@ -1,0 +1,76 @@
+body{
+
+}
+.alert{
+	display: none;
+}
+.mostrar{
+	display: block;
+}
+.ocultar{
+	display: none;
+}
+.borda{
+	border: 2px solid red;
+}
+.square {
+  border-radius: 0 !important;
+}
+.jumbotron { 
+    background-color: #32CD32; /* Orange */
+    color: #ffffff;
+    margin: 0;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+.thumbnail {
+    padding: 0 0 15px 0;
+    border-radius: 10px 10px;
+	height: 400px
+
+	
+ }
+
+.thumbnail > img{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    border-top-right-radius: 10px 10px;
+    border-top-left-radius: 10px 10px;
+    
+
+}
+.container-fluid{
+	margin: 0;
+	background: silver;
+}
+.carousel-inner img {
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+}
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}/*fazer acontecer*/
+.row{
+	margin: 20px 50px;
+}
+.navcor{
+	background-color: #2d2d30;
+	opacity:0.9;
+}
+
+
+/*fazer thumbnail mudar ao colocar mouse em cima */
+.panel:hover {
+    box-shadow: 2px 2px 30px DarkGreen;
+}
+
+.panel-footer .btn:hover {
+    border: 10px solid #f4511e;
+    background-color: #fff !important;
+    color: #f4511e;
+}
+
+
