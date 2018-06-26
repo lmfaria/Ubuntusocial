@@ -1,3 +1,6 @@
+var quemsomos;
+var textVolunt;
+
 function menu(id, name){
 	var nome = document.getElementsByName(name);
 	for (var i = nome.length - 1; i >= 0; i--) {
@@ -6,13 +9,13 @@ function menu(id, name){
 	document.getElementById(id).className = "active col-sm-4";
 	switch (id){
 		case "h.sobre":
-		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><div class='jumbotrom'><p><big id='quem'> </big></p></div>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><div class='jumbotrom'><p><big id='quemss'> "+quemsomos+"</big></p></div>";
 		break;
 		case "h.doa":
-		document.getElementById("conteudo").innerHTML =  "<b>Gostaria de ajudar ?</b></big></div><div class='jumbotrom'><p><big><span class='glyphicons glyphicons-dining-set'></span>Alimento<br><span class='glyphicons glyphicons-t-shirt'></span>Roupa<br><span class='glyphicons glyphicons-education'></span>Materias Didáticos<br><span class='glyphicons glyphicons-soccer-ball'></span>Brinquedos<br><span class='glyphicons glyphicons-usd'></span>Dinheiro<br><span class='glyphicons glyphicons-cleaning'></span>Materiais de Limpeza <br>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>Gostaria de ajudar ?</b></big></div><div class='jumbotrom'><p><big><span class='glyphicons glyphicons-dining-set'></span>Alimento<br><span class='glyphicons glyphicons-t-shirt'></span>Roupa<br><span class='glyphicons glyphicons-education'></span>Materias Didáticos<br><span class='glyphicons glyphicons-soccer-ball'></span>Brinquedos<br><span class='glyphicons glyphicons-usd'></span>Dinheiro<br><span class='glyphicons glyphicons-cleaning'></span>Materiais de Limpeza <br>";
 		break;	
 		case "h.voluntarios":
-		document.getElementById("conteudo").innerHTML =  "<b>O que esperamos dos volutários?</b></big></div>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>O que esperamos dos volutários?</b></big></div><div class='jumbotrom'><p><big>"+textVolunt+"</big></p></div>";
 		break;
 		/**case "h.contatos":
 		document.getElementById("conteudo").innerHTML =   "";
@@ -22,19 +25,28 @@ function menu(id, name){
 }
 function menualt(id, name){
 	var nome = document.getElementsByName(name);
+	var ativo;
 	for (var i = nome.length - 1; i >= 0; i--) {
+		if(nome[i].className == "active col-sm-4"){
+			ativo = i;
+		}
 		nome[i].className = "col-sm-4";
 	}
 	document.getElementById(id).className = "active col-sm-4";
+	if(ativo == 0){
+		quemsomos = document.getElementById('textalt').innerHTML;
+	}else if(ativo == 2){
+		textVolunt = document.getElementById('textalt').innerHTML;
+	}
 	switch (id){
 		case "h.sobre":
-		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><p><textarea id='desc' class='form-control' rows='5'></textarea></p>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><p><textarea id='textalt' class='form-control' rows='5'>" + quemsomos +"</textarea></p>";
 		break;
 		case "h.doa":
-		document.getElementById("conteudo").innerHTML =  "<b>Gostaria de ajudar ?</b></big></div><div class='jumbotrom'><p><big><span class='glyphicons glyphicons-dining-set'></span>Alimento<br><span class='glyphicons glyphicons-t-shirt'></span>Roupa<br><span class='glyphicons glyphicons-education'></span>Materias Didáticos<br><span class='glyphicons glyphicons-soccer-ball'></span>Brinquedos<br><span class='glyphicons glyphicons-usd'></span>Dinheiro<br><span class='glyphicons glyphicons-cleaning'></span>Materiais de Limpeza <br>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>Gostaria de ajudar ?</b></big></div><div class='jumbotrom'><p><big><span class='glyphicons glyphicons-dining-set'></span>Alimento<br><span class='glyphicons glyphicons-t-shirt'></span>Roupa<br><span class='glyphicons glyphicons-education'></span>Materias Didáticos<br><span class='glyphicons glyphicons-soccer-ball'></span>Brinquedos<br><span class='glyphicons glyphicons-usd'></span>Dinheiro<br><span class='glyphicons glyphicons-cleaning'></span>Materiais de Limpeza <br>";
 		break;	
 		case "h.voluntarios":
-		document.getElementById("conteudo").innerHTML =  "<b>O que esperamos dos volutários?</b></big></div><p><textarea id='volunta' class='form-control' rows='5'></textarea></p>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>O que esperamos dos volutários?</b></big></div><p><textarea id='textalt' class='form-control' rows='5'>"+ textVolunt +"</textarea></p>";
 		break;
 		/**case "h.contatos":
 		document.getElementById("conteudo").innerHTML =   "";

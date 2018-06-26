@@ -214,20 +214,21 @@
 					<div class="panel panel-default text-center " style="margin-right: 0px;
     margin-left: 0px;">
 						<div class="panel-heading">
+							<form method="post" action="forminst.php" id="forminst">
 							<h1 id="nome">Apae de vila velha</h1>
 						</div>
 						<div class="panel-body">
-							<form method="post">
+
 							<p ><strong>Área de atuação: </strong> </p>
-							<textarea id="quem" class="form-control" rows="5">teste</textarea>
+							<textarea id="quem" name = "quem" class="form-control" rows="5">teste</textarea>
 							<p ><strong>Número de impactados: </strong> </p>
-							<input id="Num" type="number" class="form-control" placeholder="Não fornecido">
+							<input id="Num" name = "Num" type="number" class="form-control" placeholder="Não fornecido">
 							<p ><strong>Endereço: </strong></p>
-							<textarea id="endereco" class="form-control" rows="3" >teste</textarea>
+							<textarea id="endereco" name = "endereco" class="form-control" rows="3" >teste</textarea>
 							<p ><strong>Contato: </strong> </p>
-								<input id="telefone" type="number" class="form-control">
+								<input id="insttelefone" name = "insttelefone" type="text" class="form-control">
 							<p ><strong>Email: </strong></p>
-							<input id="email" type="email" class="form-control">
+							<input id="instemail" name = "instemail" type="email" class="form-control">
 							
 							<div class="input-group-btn">
 									<button type="submit" class="btn btn-default"></span> Salvar</button>
@@ -257,7 +258,7 @@
 						<div id = "conteudo" class="containerm">
 							<div class="row" style="margin-top: 0px"><big><b>Quem Somos ? </b></big></div>
 							<div class="jumbotrom"> 
-								<textarea id='desc' class='form-control' rows='5'></textarea>
+								<textarea id='textalt' class='form-control' rows='5'></textarea>
 							</div>
 								
 						</div>
@@ -285,11 +286,11 @@
 			if (!isset($_SESSION)) session_start();
 			// Verifica se não há a variável da sessão que identifica o usuário
 			if (!isset($_SESSION["inst"]))
-			 {
-      		// Destrói a sessão por segurança
-      		session_destroy();
+			{
       		// Redireciona o visitante de volta pro login
-      		header("Location: index.php"); exit;
+      		echo '<script type="text/javascript">window.location="index.php"</script>';
+      		//encerra todas as funçoes
+      		exit;
   			}
 			// Verifica se não há a variável da sessão que identifica o usuário
 			if (isset($_SESSION["inst"])) 
@@ -297,8 +298,6 @@
 			//esconde login e cadastro e exibe logout
 			echo "<script>logon()</script>";
 			}
-
-
 
 
 
@@ -319,7 +318,7 @@
 				if (!$conn) {
 					die("Connection failed: " . mysqli_connect_error());
 				}
-				$nome = $_GET['inst'];
+				$nome = $_SESSION["inst"];
 				$sql = "select nome,textodesc,textovol,email,telefone,endereco,info,fotos from instituicoes where nome like '%$nome%';";
 
 				$result = mysqli_query($conn, $sql);
@@ -337,21 +336,25 @@
 						$foto = '"'.utf8_encode ($row["fotos"]).'"';
 
 //
-
+						
 
 // trocar o quem por segmento
 						echo"<script type='text/javascript'>document.getElementById('nome').innerHTML = " .$anome. " ; 
 						document.getElementById('quem').value = '" .utf8_encode ($row["textodesc"]). "' ;
-						document.getElementById('email').value = '" .utf8_encode ($row["email"]). "' ;
-						document.getElementById('telefone').value = '" .utf8_encode ($row["telefone"]). "' ;
+						document.getElementById('instemail').value = '" .utf8_encode ($row["email"]). "' ;
+						document.getElementById('insttelefone').value = '" .utf8_encode ($row["telefone"]). "' ;
 						document.getElementById('endereco').value = '" .utf8_encode ($row["endereco"]). "' ;
-						document.getElementById('desc').value = '" .utf8_encode ($row["textodesc"]). "' ;
-						document.getElementById('volunta').value = '" .utf8_encode ($row["textovol"]). "' ;
+						textVolunt = '" .utf8_encode ($row["textovol"]). "' ;
+						quemsomos =  '" .utf8_encode ($row["textodesc"]). "' ;
+						if(quemsomos == ''){
+							quemsomos = 'instituição não ofereceu informações para esse campo';
+						}
+						if(textVolunt == ''){
+							textVolunt = 'instituição não ofereceu informações para esse campo';
+						}
+						document.getElementById('textalt').innerHTML = '" .utf8_encode ($row["textodesc"]). "' ;
 						document.getElementById('fotos').innerHTML = '<img  src=".$foto." alt=".$anome." ".$depois." ' ;					
 						</script>";
-						
-						
-
 
 					}
 				} else {

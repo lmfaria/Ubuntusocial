@@ -221,8 +221,8 @@
 							<p id="quem"><strong>Área de atuação: </strong>Auxílio a pessoas com definciência intelectual </p>
 							<p id="Num"><strong>Número de impactados: </strong> Não fornecido </p>
 							<p id="endereco"><strong>Endereço: </strong> rua cabo aylson simoes 185 centro 29100320</p>
-							<p id="telefone"><strong>Contato: </strong>32992628
-							<p id="email"><strong>Email: </strong>ubuntu.vv@gmail.com
+							<p id="insttelefone"><strong>Contato: </strong>32992628
+							<p id="instemail"><strong>Email: </strong>ubuntu.vv@gmail.com
 							</p>
        <!-- <div class="panel-footer">
           <h3>$19</h3>
@@ -247,16 +247,16 @@
 						<!-- Teste-->
 						<div class="topnav row" style="margin: 0px">
 
-							<a class="active col-sm-3" name="oi" onclick="menu('h.sobre', 'oi')" href="#home" id="h.sobre">Sobre</a>
-							<a class=" col-sm-3" href="#news" name="oi" onclick="menu('h.info', 'oi')" id = "h.info">Doações</a>
-							<a class=" col-sm-3" href="#volunt" name="oi" onclick="menu('h.vonluntarios', 'oi')" id = "h.vonluntarios" >Voluntários</a> 
-							<a class=" col-sm-3" href="#contact" name="oi" onclick="menu('h.contatos', 'oi')" id = "h.contatos" >Comentários</a> 
+							<a class="active col-sm-4" name="oi" onclick="menu('h.sobre', 'oi')" href="#home" id="h.sobre">Sobre</a>
+							<a class=" col-sm-4" href="#news" name="oi" onclick="menu('h.doa', 'oi')" id = "h.doa">Doações</a>
+							<a class=" col-sm-4" href="#volunt" name="oi" onclick="menu('h.voluntarios', 'oi')" id = "h.voluntarios" >Voluntários</a> 
+						<!--	<a class=" col-sm-3" href="#contact" name="oi" onclick="menu('h.contatos', 'oi')" id = "h.contatos" >Comentários</a> -->
 						</div>
 						<!--<h1 style="text-align: center; " id="nome1"> Apae de vila velha </h1>-->
 						<div id = "conteudo" class="containerm">
 							<div class="row" style="margin-top: 0px"><big><b>Quem Somos ? </b></big></div>
 							<div class="jumbotrom"> 
-								<p><big id="quem"> 	Comunidade que se une para prevenir e tratar a deficiência e promover o bem estar e desenvolvimento da pessoa com deficiência.</big></p></div>
+								<p><big id="quemss"> 	Comunidade que se une para prevenir e tratar a deficiência e promover o bem estar e desenvolvimento da pessoa com deficiência.</big></p></div>
 								<!--<div class="row" id="doa"><big><b>Doações</b></big></div>
 								<div class="row" id="doa"><big style="text-align: center;"><b>Gostaria de ajudar ?</b></big></div>
 
@@ -428,10 +428,20 @@ ass="glyphicons glyphicons-lab-alt"></span>n> Remédios
 						$foto = '"'.utf8_encode ($row["fotos"]).'"';
 
 						echo"<script type='text/javascript'>document.getElementById('nome').innerHTML = " .$anome. " ; 
+						document.getElementById('quemss').innerHTML = quemsomos
 						document.getElementById('quem').innerHTML = '<strong>Área de atuação: </strong>" .utf8_encode ($row["textodesc"]). "' ;
-						document.getElementById('email').innerHTML = '<strong>Email: </strong>" .utf8_encode ($row["email"]). "' ;
-						document.getElementById('telefone').innerHTML = '<strong>Telefone: </strong>" .utf8_encode ($row["telefone"]). "' ;
+						document.getElementById('instemail').innerHTML = '<strong>Email: </strong>" .utf8_encode ($row["email"]). "' ;
+						document.getElementById('insttelefone').innerHTML = '<strong>Telefone: </strong>" .utf8_encode ($row["telefone"]). "' ;
 						document.getElementById('endereco').innerHTML = '<strong>Endereço: </strong>" .utf8_encode ($row["endereco"]). "' ;
+						textVolunt = '" .utf8_encode ($row["textovol"]). "' ;
+						quemsomos =  '" .utf8_encode ($row["textodesc"]). "' ;
+						if(quemsomos == ''){
+							quemsomos = 'instituição não ofereceu informações para esse campo';
+						}
+						if(textVolunt == ''){
+							textVolunt = 'instituição não ofereceu informações para esse campo';
+						}
+						document.getElementById('quemss').innerHTML = quemsomos;
 						document.getElementById('fotos').innerHTML = '<img  src=".$foto." alt=".$anome." ".$depois." ' ;					
 						</script>";
 						
