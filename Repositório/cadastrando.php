@@ -1,5 +1,5 @@
 <?php 
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "ubuntusocial";
@@ -29,14 +29,11 @@ $select = mysql_select_db('ubuntusocial') or die (mysql_error());
 	$usu = $_POST['usu'];
 	$pass = $_POST['pass'];
 	$confirmpass = $_POST['confirmpass'];
-
-/*confere se o usuário já existe e outras condições
-	$query_select = "SELECT usu FROM cadastro WHERE usu = '$usu'";
-	$ususelect = mysql_query($query_select,$connect);
+//confere se o usuário já existe e outras condições
+	$sql = ("SELECT usu FROM cadastro WHERE usu = '$usu'");
+	$ususelect = mysql_query($sql);
 	$array = mysql_fetch_array($ususelect);
 	$logarray = $array['usu'];
-
-
 	if($nome == "" || $nome == null)
 	{
 		echo"<script language='javascript' type='text/javascript'>alert('O campo nome da instituição deve ser preenchido');window.location.href='index.php';</script>";
@@ -73,18 +70,9 @@ $select = mysql_select_db('ubuntusocial') or die (mysql_error());
 	{
 		echo"<script language='javascript' type='text/javascript'>alert('A confirmação de senha não confere');window.location.href='index.php';</script>";
 	}
-
-
-*/
-
-
-
-
-
-	$sql = mysql_query("INSERT INTO cadastro VALUES('$nome', '$telefone', '$email', '$usu', '$pass')");
+	$sql = mysql_query("INSERT INTO cadastro(nomedainstituicao, telefone, email, usu, pass) VALUES('$nome', '$telefone', '$email', '$usu', '$pass')");
 	echo "<center><h1>Cadastrado com sucesso<h1>";
-    echo "<script type='text/javascript'> setTimeout('window.location='index.php'', 3000);</script>";
-
+    echo "<script type='text/javascript'> setTimeout(window.location='index.php', 3000);</script>";
 	?>
 
 

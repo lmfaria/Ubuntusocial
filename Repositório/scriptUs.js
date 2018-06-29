@@ -164,3 +164,34 @@ function logon()
 	document.getElementById('menulogout').style.display="block";
 	document.getElementById('menuinstalt').style.display="block";
 }
+
+function postInst(){
+	var nome = $("#nome").val();
+    //var setor = $("#quem").val();
+   // var impactados = $("#Num").val();
+    var endereco = $("#endereco").val();
+    var telefone = $("#insttelefone").val();
+    var email = $("#instemail").val();
+
+    $.ajax
+    ({
+    	type: 'post',
+    	url: 'forminst.php',
+    	data:
+    	{
+    		inst_nome : nome,
+    		inst_endereco : endereco,
+    		inst_telefone : telefone,
+    		inst_email : email
+    		//inst_setor = setor,
+    		//inst_impactados = impactados,
+
+    	},
+    	success: function(response){
+
+    		document.getElementById('status').style.display="block";
+    	} 
+    })
+
+
+}

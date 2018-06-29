@@ -51,10 +51,20 @@ if( $row > 0 )
 	$_SESSION["senha"] = $senha;
 	$sql2 = mysql_query("SELECT nomedainstituicao FROM cadastro WHERE usu = '$login' and pass = '$senha'");
 	$inst = mysql_fetch_array($sql2);
+	$idinst = $inst[0];
+	// quebrando galho fazer ser id
+	$sql3 = mysql_query("SELECT idinst FROM instituicoes WHERE nome like '$idinst%'");
+	$id = mysql_fetch_array($sql3);
 	$_SESSION["inst"] = $inst['nomedainstituicao'];
+	$_SESSION['id'] = $id['idinst'];
+	$_serieSESSION = serialize($_SESSION);
+	var_dump($_SESSION);
+	var_dump($inst);
+	var_dump($id);
+
 	//echo "Você foi autenticado com sucesso, aguarde um instante";
 	echo "<script>loginsuccessfully()</script>";
-	$_serieSESSION = serialize($_SESSION);
+
 
     
 }

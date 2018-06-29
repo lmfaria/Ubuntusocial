@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-	<meta charset="UTF-8">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ubuntu Social</title>
-	<script type="text/javascript" src="scriptUS.js"></script>
+	<script type="text/javascript" src="scriptUs.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
@@ -13,11 +13,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<link rel="stylesheet" type="text/css" href="styleUs.css">
+	<link rel="icon" href= "fotos/logoUS.png" style="width: 100%;">
 
 
 </head>
+
 <body>
-	<!-- Nav bar karalhuda -->
+<!-- Nav bar karalhuda -->
 
 	<nav class="navbar navbar-default navbar-fixed-top ">
 		<div class="container">
@@ -49,7 +51,7 @@
 										<!--<form action="pesquisa.php" method="post">-->
 											<ul class="dropdown-menu dropdown-menu-right">
 												<div class="radio" style="padding-left: 10px; padding-right: 10px">
-													<li><label><input type="radio" name="filtro" value="Tudo" checked="checked">Tudo</label>
+													<li><label><input type="radio" name="filtro" value="tudo" checked="checked">Tudo</label>
 													<li><label><input type="radio" name="filtro" value="nome">Nome</label>
 													<li><label><input type="radio" name="filtro" value="endereco">Local</label>
 													<li><label><input type="radio" name="filtro" value="doacoes">Tipo de doação</label>
@@ -61,8 +63,8 @@
 					</li></form>
 <!-- fim da barra de pesquisa-->				
 
-			<li><a href="/#home">Ínicio</a></li>
-			<li><a href="/#portfolio">Projetos</a></li>
+			<li><a href="#home">Ínicio</a></li>
+			<li><a href="#portfolio">Projetos</a></li>
 			<li><a href="#pricing">Quem Somos</a></li>
 <!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
 			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
@@ -101,9 +103,10 @@
 											</li>										
 											<li>
 												<!--botão que limpa os inputs. Não usei função, ele limpa por html5 não sei se funciona no resto -->
-												<input class="btn btn-danger" name='botao' value='Limpar' >
-												<!--Botao que chama a função de validação -->
-												<div><input class="btn btn-primary" type='submit' name='botao' value='Logar'></div>
+												<div>
+													<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+													<input class="btn btn-primary" type='submit' name='botao' value='Entrar' >
+												</div>
 											</li>
 										</form>										
 									</fieldset>
@@ -214,8 +217,8 @@
 					<div class="panel panel-default text-center " style="margin-right: 0px;
     margin-left: 0px;">
 						<div class="panel-heading">
-							<form method="post" action="forminst.php" id="forminst">
-							<h1 id="nome">Apae de vila velha</h1>
+							<form method="post" action="" onsubmit="return postInst();"  id="forminst">
+							<input type="text" name="nome" id="nome">
 						</div>
 						<div class="panel-body">
 
@@ -230,7 +233,9 @@
 							<p ><strong>Email: </strong></p>
 							<input id="instemail" name = "instemail" type="email" class="form-control">
 							
+							<span id="status" style="display: none;">Informações cadastradas com sucesso</span>
 							<div class="input-group-btn">
+
 									<button type="submit" class="btn btn-default"></span> Salvar</button>
 									<button type="reset" class="btn btn-default"></span> Cancelar</button>
 							</div>
@@ -239,7 +244,6 @@
   </div>
 </div> 
 						
-
 
 					</div>
 
@@ -299,7 +303,7 @@
 			echo "<script>logon()</script>";
 			}
 
-
+			//var_dump($_SESSION);
 
 
 
@@ -314,12 +318,14 @@
 
 // Create connection
 				$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+				$idinst;
 // Check connection
 				if (!$conn) {
 					die("Connection failed: " . mysqli_connect_error());
 				}
 				$nome = $_SESSION["inst"];
-				$sql = "select nome,textodesc,textovol,email,telefone,endereco,info,fotos from instituicoes where nome like '%$nome%';";
+				$sql = "select idinst, nome,textodesc,textovol,email,telefone,endereco,info,fotos from instituicoes where nome like '%$nome%';";
 
 				$result = mysqli_query($conn, $sql);
 				$depois = 'class="box" style="margin-left: 30px; max-height:240px">';
@@ -329,17 +335,18 @@
     // output data of each row
 					//document.getElementById('voluntario').innerHTML = '" .utf8_encode ($row["textovol"]). "' ;
 					//						document.getElementById('info').innerHTML = '" .utf8_encode ($row["info"]). "' ;
-					echo "<span>".$row["nome"]."</span>";
+					//echo "<span>".$row["nome"]."</span>";
 					while($row = mysqli_fetch_assoc($result)) {
 
 						$anome = '"'.utf8_encode ($row["nome"]).'"';
 						$foto = '"'.utf8_encode ($row["fotos"]).'"';
+						$idinst = '"'.utf8_encode ($row["idinst"]).'"';
 
 //
 						
 
 // trocar o quem por segmento
-						echo"<script type='text/javascript'>document.getElementById('nome').innerHTML = " .$anome. " ; 
+						echo"<script type='text/javascript'>document.getElementById('nome').value = " .$anome. " ; 
 						document.getElementById('quem').value = '" .utf8_encode ($row["textodesc"]). "' ;
 						document.getElementById('instemail').value = '" .utf8_encode ($row["email"]). "' ;
 						document.getElementById('insttelefone').value = '" .utf8_encode ($row["telefone"]). "' ;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ubuntu Social</title>
 	<script type="text/javascript" src="scriptUs.js"></script>
@@ -12,10 +12,12 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="styleUs.css">
+	<link rel="icon" href= "fotos/logoUS.png" style="width: 100%;">
 
 
 </head>
+
 <body>
 <!-- Nav bar karalhuda -->
 
@@ -30,11 +32,13 @@
 				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -410px;"  ></a>
 				<!--fazer o search ser responsivo-->
 			</div>
+
 					<!--<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search" size="80%" >
 					<button type="submit" class="btn btn-default">Pesquisar</button>
 					
 				</div>-->
+
 <!-- Nova bara de pesquisa -->
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">											
@@ -47,7 +51,7 @@
 										<!--<form action="pesquisa.php" method="post">-->
 											<ul class="dropdown-menu dropdown-menu-right">
 												<div class="radio" style="padding-left: 10px; padding-right: 10px">
-													<li><label><input type="radio" name="filtro" value="Tudo" checked="checked">Tudo</label>
+													<li><label><input type="radio" name="filtro" value="tudo" checked="checked">Tudo</label>
 													<li><label><input type="radio" name="filtro" value="nome">Nome</label>
 													<li><label><input type="radio" name="filtro" value="endereco">Local</label>
 													<li><label><input type="radio" name="filtro" value="doacoes">Tipo de doação</label>
@@ -58,6 +62,7 @@
 							</div>
 					</li></form>
 <!-- fim da barra de pesquisa-->				
+
 			<li><a href="#home">Ínicio</a></li>
 			<li><a href="#portfolio">Projetos</a></li>
 			<li><a href="#pricing">Quem Somos</a></li>
@@ -98,12 +103,14 @@
 											</li>										
 											<li>
 												<!--botão que limpa os inputs. Não usei função, ele limpa por html5 não sei se funciona no resto -->
-												<input class="btn btn-danger" name='botao' value='Limpar' >
-												<!--Botao que chama a função de validação -->
-												<div><input class="btn btn-primary" type='submit' name='botao' value='Logar'></div>
+												<div>
+													<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+													<input class="btn btn-primary" type='submit' name='botao' value='Entrar' >
+												</div>
 											</li>
 										</form>										
 									</fieldset>
+
 							</div>
 					</ul>
 			</li>
@@ -191,6 +198,7 @@
 		</div>
 	</nav>
 
+
 <!-- Fim da  Nav bar karalhuda -->
 		<div class="container-fluid" style="margin-top: 50px">
 
@@ -206,8 +214,7 @@
 			</div> 
 
 			<?php
-			//inicia sessão
-			if (!isset($_SESSION)) session_start();
+			if (!isset($_SESSION)) {session_start();}
 			// Verifica se não há a variável da sessão que identifica o usuário
 			if (isset($_SESSION["inst"])) 
 			{
@@ -236,11 +243,12 @@
 			}
 			$nome = $_GET['pesquisa'];
 			$filtro = $_GET['filtro'];
+			var_dump($_GET);
 			if ($filtro == "tudo"){
 			$sql = "SELECT nome,textodesc,fotos FROM instituicoes WHERE nome LIKE '%$nome%' OR textodesc LIKE '%$nome%' OR textovol LIKE '%$nome%' OR endereco LIKE '%$nome%' OR segmento LIKE '%$nome%' OR info LIKE '%$nome%';";
 			}
 			else{
-				$sql = "SELECT nome,textodesc,fotos FROM instituicoes WHERE $filtro LIKE '%$nome%';";
+			$sql = "SELECT nome,textodesc,fotos FROM instituicoes WHERE '$filtro' LIKE '%$nome%';";
 			}
 			$result =mysqli_query($conn, $sql);
 			if (mysqli_num_rows($result) > 0) {
@@ -258,9 +266,7 @@
 					
 				}
 			} else {
-				echo "No results";
-				
-				
+				echo "No results";				
 			}
 			mysqli_close($conn);
 			?>
