@@ -29,7 +29,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -410px;"  ></a>
+				<a class="navbar-brand" href="index.php" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -400px;"  ></a>
 				<!--fazer o search ser responsivo-->
 			</div>
 
@@ -42,9 +42,9 @@
 <!-- Nova bara de pesquisa -->
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">											
-					<li><form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
+					<li><form class="navbar-form navbar-header  " action="pesquisa.php" method="get">
 							<div class="input-group" style="margin-left: 15px; margin-right: 15px;">
-								<input type="search" name="pesquisa" class="form-control" size="45%" placeholder="Procurando a instituição ideal para doar ?" required>
+								<input type="search" name="pesquisa" class="form-control" size="60%" placeholder="Procurando a instituição ideal para doar ?" required>
 									<div class="input-group-btn">
 										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
 										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></button>
@@ -63,9 +63,9 @@
 					</li></form>
 <!-- fim da barra de pesquisa-->				
 
-			<li><a href="#home">Ínicio</a></li>
-			<li><a href="#portfolio">Projetos</a></li>
-			<li><a href="#pricing">Quem Somos</a></li>
+		<!--	<li><a href="#home">Ínicio</a></li>-->
+			<li><a href="projetos.php">Projetos</a></li>
+		<!--	<li><a href="#pricing">Quem Somos</a></li>-->
 <!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
 			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
 			<li id="menulogout" style="display:none;"><a href="logout.php">Sair</a></li>
@@ -198,8 +198,8 @@
 		</div>
 	</nav>
 
-
 <!-- Fim da  Nav bar karalhuda -->
+
 		<div class="container-fluid" style="margin-top: 50px">
 
 			<div class="row ">
@@ -241,6 +241,15 @@
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
+
+				//garante o utf8
+   mysql_query("SET character_set_results=utf8",$conn);
+   mb_language('uni'); 
+   mb_internal_encoding('UTF-8');
+   mysql_query("set names 'utf8'",$conn);
+   //fim 
+
+
 			$nome = $_GET['pesquisa'];
 			$filtro = $_GET['filtro'];
 			var_dump($_GET);
@@ -257,9 +266,9 @@
 				while($row = mysqli_fetch_assoc($result)) {
 					$foto = '"'.utf8_encode ($row["fotos"]).'"';
 					$l= '"';
-					$anome = '"'.utf8_encode ($row["nome"]).'"';
-					$textodesc = '"'.utf8_encode ($row["textodesc"]).'"'; 
-					$complemento = "'<a href=".$l."inst.php?inst=".utf8_encode ($row["nome"])."".$l."><div class=".$l."thumbnail".$l." style=".$l."width:100%; overflow: hidden; text-overflow: ellipsis;".$l." ><img src=".$foto." alt=".$anome."  style=".$l."max-height:240px;".$l."><p><strong>".$anome."</strong></p><div class=".$l."thumbnail".$l." style=".$l." max-height:80px; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical; border: 0px;".$l."><p  style=".$l." margin: 0 15px; ".$l." > ".$textodesc."</p></div></div></a> ' ";
+					$anome = utf8_encode ($row["nome"]);
+					$textodesc = utf8_encode ($row["textodesc"]); 
+					$complemento = "'<a href=".$l."inst.php?inst=".utf8_encode ($row["nome"])."".$l."><div class=".$l."thumbnail  panel hv".$l." style=".$l."width:100%; color:black; overflow: hidden; text-overflow: ellipsis; margin-right: 5%; margin-left: 5%".$l." ><img src=".$foto." alt=".$anome."  style=".$l."max-height:240px;".$l."><p style=".$l."margin-right: 5%; margin-left: 5%;".$l."><strong>".$anome."</strong></p><div class=".$l."thumbnail".$l." style=".$l." max-height:80px; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical; border: 0px;".$l."><p  style=".$l." margin: 0 15px; color:DarkSlateGray;".$l." > ".$textodesc."</p></div></div></a> ' ";
 					echo"<script type='text/javascript'>	document.getElementsByName('nome')[".$i."].innerHTML = ".$complemento." ; 
 					</script>";
 					$i++;

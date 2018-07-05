@@ -21,6 +21,8 @@
 </head>
 
 <body>
+<!-- Nav bar karalhuda -->
+
 	<nav class="navbar navbar-default navbar-fixed-top ">
 		<div class="container">
 			<div class="navbar-header" ">
@@ -29,7 +31,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -400px;""  ></a>
+				<a class="navbar-brand" href="index.php" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -400px;"  ></a>
 				<!--fazer o search ser responsivo-->
 			</div>
 
@@ -39,147 +41,167 @@
 					
 				</div>-->
 
-
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-
-						<li><form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
-							<div class="input-group " style="margin-left: 10px; margin-right: 50px; ">
-								<input type="search" class="form-control" size="65%" placeholder="Procurando a instituição ideal para doar ? " required>
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default" id="teste"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
-								</div>
+<!-- Nova bara de pesquisa -->
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">											
+					<li><form class="navbar-form navbar-header  " action="pesquisa.php" method="get">
+							<div class="input-group" style="margin-left: 15px; margin-right: 15px;">
+								<input type="search" name="pesquisa" class="form-control" size="60%" placeholder="Procurando a instituição ideal para doar ?" required>
+									<div class="input-group-btn">
+										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
+										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></button>
+										<!--<form action="pesquisa.php" method="post">-->
+											<ul class="dropdown-menu dropdown-menu-right">
+												<div class="radio" style="padding-left: 10px; padding-right: 10px">
+													<li><label><input type="radio" name="filtro" value="tudo" checked="checked">Tudo</label>
+													<li><label><input type="radio" name="filtro" value="nome">Nome</label>
+													<li><label><input type="radio" name="filtro" value="endereco">Local</label>
+													<li><label><input type="radio" name="filtro" value="doacoes">Tipo de doação</label>
+													<li><label><input type="radio" name="filtro" value="segmento">Segmento</label>
+												</div>
+											</ul>  
+									</div>
 							</div>
-						</form></li>
+					</li></form>
+<!-- fim da barra de pesquisa-->				
 
-						<li><a href="index.php">Ínicio</a></li>
-						<li><a href="#portfolio">Projetos</a></li>
-						<li><a href="#pricing">Quem Somos</a></li>
+		<!--	<li><a href="#home">Ínicio</a></li>-->
+			<li><a href="projetos.php">Projetos</a></li>
+		<!--	<li><a href="#pricing">Quem Somos</a></li>-->
+<!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
+			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
+			<li id="menulogout" style="display:none;"><a href="logout.php">Sair</a></li>
+<!-- id para menulogin e menucadastro ps:sem eles vai dar merda -->
 						<!--Código para a parte de login -->
-						<!--Div pop -->
-						<li><style>#pop{display:none;position:absolute;bottom:10%;top:1%;right:-100%;margin-left:-1500px;margin-top:50px;padding:10px;width:450px;height:550px;border:1px solid #d0d0d0; background-color: #ffffff}</style>
-							<!--Div do botão de fechar -->
-							<div id="pop"><div align="right"><a href="#" onclick="document.getElementById('pop').style.display='none';"><button class="btn btn-danger btn-xs">x</button></a><br/></div>
-							<!-- função de validação ps:pode ser dividida em outro arquivo-->
-
-
-							<script type="text/javascript">
-
-								function validaForm()
-								{
-									document.getElementById('erro').innerHTML="";
-									document.getElementById('erro').style.display="none";
-									document.getElementById('usuario').style.border="";
-									document.getElementById('senha').style.border="";
-
-									if (document.getElementById('usuario').value && document.getElementById('senha').value == "")
-									{
-										document.getElementById('erro').innerHTML="Preencha o campo usuario<br>Preencha o campo senha";
-										document.getElementById('erro').style.display="block";
-										document.getElementById('usuario').style.border="2px solid red";
-										document.getElementById('senha').style.border="2px solid red";
-										return false;
-									}
-
-
-									if (document.getElementById('usuario').value == "")
-									{
-										document.getElementById('erro').innerHTML="Preencha o campo usuario <br>";
-										document.getElementById('erro').style.display="block";
-										document.getElementById('usuario').style.border="2px solid red";
-										return false;
-									}
-									if (document.getElementById('senha').value == "")
-									{
-										document.getElementById('erro').innerHTML+="Preencha o campo senha";
-										document.getElementById('erro').style.display="block";
-										document.getElementById('senha').style.border="2px solid red";
-										return false;
-									}
-									else
-									{
-										return true;
-									}
-								}
-							</script>
-
-							<!--Div do formulário -->
-
-							<div class='login'>
+			<li id="menulogin" class="dropdown">
+				<a  class="dropdown-toggle" data-toggle="dropdown" href="#">Login<span class="caret"></span></a>
+					<ul class="dropdown-menu" style="width: 300px">
+						<!--Div do formulário -->
+							<div class='login' style="max-width: 100%; padding: 5%">
 								<fieldset>
-									<table>
-
-
 										<!--Formulario com metodo post e a pagina para redirecionar -->
-										<form method="post" action="verif.php" id="formlogin">
-											<tr>
-												<div>Associações e Entidades</div>
-											</tr>
-											<br>
-											<tr>
+										<form method="post" action="verif.php" id="formlogin" name="formlogin" onsubmit="return validaForm()">
+											<li>
 												Usuário
+											</li>
+											<li>
 												<!--Inputs -->
 												<div class="input-group">
 													<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-													<input id="usuario" type="text" class="form-control" name="login" placeholder="Usuário">
+													<input id="usuario" type="text" class="form-control" name="login" placeholder="Usuário" style="width:100%">
 												</div>
-											</tr>
-											<br>
-											<tr>
+											</li>
+											<li>
 												Senha
+											</li>
+											<li>
 												<div class="input-group">
 													<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-													<input id="senha" type="password" class="form-control" name="senha" placeholder="Senha">
+													<input id="senha" type="password" class="form-control" name="senha" placeholder="Password" style="width:100%">
 												</div>
 												<br>
 												<!--Alerta de erro -->
 												<div id="erro" class="alert alert-danger" role="alert"></div>
-											</tr>
-											<!--Um br aqui ou não? -->										
-											<tr>
-												<!--Botao que chama a função de validação -->
-												<div><input class="btn btn-primary" type='submit' name='botao' value='Logar' onclick="return validaForm()"></div>
-											</tr>
-										</form>
-										<!--Essa parte pode ser implementada de maneira melhor -->
-										<form method="post" action="cadastro.php" id="cadastro">
-											<br>
-											<tr>
-												<div>Ainda não é cadastrado?</div>
-												<br>
-												<button class="btn btn-default">Cadastro</button>
-											</tr>
-
-										</form>
-
-									</table>
-								</fieldset>
+											</li>										
+											<li>
+												<!--botão que limpa os inputs. Não usei função, ele limpa por html5 não sei se funciona no resto -->
+												<div>
+													<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+													<input class="btn btn-primary" type='submit' name='botao' value='Entrar' >
+												</div>
+											</li>
+										</form>										
+									</fieldset>
 
 							</div>
-							<!--Milhões de códigos depois, o botão que ativa pop up -->
-						</div><a href="#" onclick="document.getElementById('pop').style.display='block';">login</a></li>
-
-
-
-
-
-
-
-
-
 					</ul>
-
-				</div>
-
+			</li>
+			<li id="menucadastro" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastro<span class="caret"></span></a>
+					<ul id="cad" class="dropdown-menu" style="width: 400px">
+						<!--Div do formulário -->
+						<div class='login' style="max-width: 100%; padding: 5%">
+							<fieldset>	
+								<!--Formulario com metodo post e a pagina para redirecionar -->
+								<form method="post" action="cadastrando.php" id="formcad" name="formcad" onsubmit="return validaFormCad()"">
+								<h4>Preencha todos os Campos</h4>
+								<!--Inputs -->
+									<li>
+										Nome da Instituição
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-home" style=""></i></span>
+											<input id="nomeinst" type="text" class="form-control" name="nomeinst" placeholder="Nome da Instituição" style="width:100%">
+										</div>
+									</li>
+									<li>
+										Telefone
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt" style=""></i></span>
+											<input id="telefone" type="text" class="form-control" name="telefone" placeholder="(xx) xxxx - xxxx" style="width:100%">
+										</div>
+									</li>
+									<li>
+										E-mail
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" style=""></i></span>
+											<input id="email" type="text" class="form-control" name="email" placeholder="email@servidor.com" style="width:100%">
+										</div>
+									</li>
+									<li>
+										Usuário
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user" style=""></i></span>
+											<input id="usu" type="text" class="form-control" name="usu" placeholder="Usuário" style="width:100%">
+										</div>
+									</li>													
+									<li>
+										Senha
+									</li>
+									<li>													
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-lock" style=""></i></span>
+											<input id="pass" type="text" class="form-control" name="pass" placeholder="Senha" style="width:100%">
+										</div>
+									</li>	
+									<li>
+										Confirme a senha
+									</li>
+									<li>
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-lock" style=""></i></span>
+											<input id="confirmpass" type="text" class="form-control" name="confirmpass" placeholder="Confirme a senha" style="width:100%">
+										</div>
+										<br>
+										<!--Alerta de erro -->
+										<div id="erro1" class="alert alert-danger" role="alert"></div>
+									</li>																
+									<li>
+										<!--Botao que chama a função de validação -->
+										<div>
+											<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+											<input class="btn btn-primary" type='submit' name='botao' value='Cadastrar' >
+										</div>
+									</li>
+								</form>
+							</fieldset>
+						</div>
+					</ul>
+				</li>
+				</ul>
 			</div>
+		</div>
+	</nav>
 
-		</nav>
+<!-- Fim da  Nav bar karalhuda -->
 
-
-
-<div>
-
- 
 	<div id="home" class="carousel slide" data-ride="carousel">
 		
 
@@ -265,22 +287,51 @@
 
 			<?php
 
+//Presente em todos
+				if (!isset($_SESSION)) {session_start();}
+			// Verifica se não há a variável da sessão que identifica o usuário
+			if (isset($_SESSION["inst"])) 
+			{
+			//esconde login e cadastro e exibe logout
+			echo "<script>logon()</script>";
+			}
+			//se não há ninguém logado, destroi a sessao
+			if (!isset($_SESSION["inst"])) 
+			{
+      		//destroi sessão por segurança
+			session_destroy();
+			}   			
 
-			//$servername = "localhost";
-			//$username = "root";
-			//$password = "";
-			//$dbname = "ubuntusocial";
-			$servername = "177.52.161.146";
-			$username = "daniell2_lucas";
-			$password = "1ixHK6vi";
-			$dbname = "daniell2_ubuntusocial";
+
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$dbname = "ubuntusocial";
+			//$servername = "177.52.161.146";
+			//$username = "daniell2_lucas";
+			//$password = "1ixHK6vi";
+			//$dbname = "daniell2_ubuntusocial";
+
+
 
 // Create connection
-			$conn = mysqli_connect($servername, $username, $password, $dbname);
+				$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+	//garante o utf8
+   mysql_query("SET character_set_results=utf8",$conn);
+   mb_language('uni'); 
+   mb_internal_encoding('UTF-8');
+   mysql_query("set names 'utf8'",$conn);
+   //fim 
+
+
+				$idinst;
 // Check connection
-			if (!$conn) {
-				die("Connection failed: " . mysqli_connect_error());
-			}
+				if (!$conn) {
+					die("Connection failed: " . mysqli_connect_error());
+				}
+
+//FIM - Presente em todos   
 			define('CHARSET', 'UTF-8');
 
 			$sql = "select nome, idinst from instituicoes

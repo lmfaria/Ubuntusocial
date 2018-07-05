@@ -29,7 +29,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -410px;"  ></a>
+				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -400px;"  ></a>
 				<!--fazer o search ser responsivo-->
 			</div>
 
@@ -42,9 +42,9 @@
 <!-- Nova bara de pesquisa -->
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">											
-					<li><form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
+					<li><form class="navbar-form navbar-header  " action="pesquisa.php" method="get">
 							<div class="input-group" style="margin-left: 15px; margin-right: 15px;">
-								<input type="search" name="pesquisa" class="form-control" size="45%" placeholder="Procurando a instituição ideal para doar ?" required>
+								<input type="search" name="pesquisa" class="form-control" size="60%" placeholder="Procurando a instituição ideal para doar ?" required>
 									<div class="input-group-btn">
 										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
 										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></button>
@@ -63,9 +63,9 @@
 					</li></form>
 <!-- fim da barra de pesquisa-->				
 
-			<li><a href="#home">Ínicio</a></li>
-			<li><a href="#portfolio">Projetos</a></li>
-			<li><a href="#pricing">Quem Somos</a></li>
+		<!--	<li><a href="#home">Ínicio</a></li>-->
+			<li><a href="/projetos.php">Projetos</a></li>
+		<!--	<li><a href="#pricing">Quem Somos</a></li>-->
 <!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
 			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
 			<li id="menulogout" style="display:none;"><a href="logout.php">Sair</a></li>
@@ -374,6 +374,15 @@
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
+
+			//garante o utf8
+   mysql_query("SET character_set_results=utf8",$conn);
+   mb_language('uni'); 
+   mb_internal_encoding('UTF-8');
+   mysql_query("set names 'utf8'",$conn);
+   //fim 
+
+		
 		define('CHARSET', 'UTF-8');
 
 		$sql = "select nome, idinst from instituicoes

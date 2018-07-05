@@ -1,3 +1,66 @@
+function postInst(){
+	var nome = $("#nome").val();
+	var atuacao = $("#atuacao").val();
+	var impactados = $("#impactados").val();
+	var endereco = $("#endereco").val();
+	var telefone = $("#insttelefone").val();
+	var email = $("#instemail").val();
+
+	$.ajax
+	({
+		type: 'post',
+		url: 'forminst.php',
+		async: false, 
+		data:
+		{
+			inst_nome : nome,
+			inst_endereco : endereco,
+			inst_telefone : telefone,
+			inst_email : email,
+			inst_atuacao : atuacao,
+			inst_impactados : impactados,
+
+		},
+		success: function(response){
+
+			document.getElementById('status').style.display="block";
+		} 
+	})
+
+
+}
+function postInstcentro(){
+	var nome = document.getElementsByName('oi');
+	var ativo;
+	var dado
+	for (var i = nome.length - 1; i >= 0; i--) {
+		if(nome[i].className == "active col-sm-4"){
+			ativo = nome[i].innerHTML;
+		}
+	}
+
+    //dado = document.getElementById('textalt').innerHTML;
+
+    dado = $("#textalt").val();;
+
+    $.ajax
+    ({
+    	type: 'post',
+    	url: 'forminstcentro.php',
+    	async: false, 
+    	data:
+    	{
+    		inst_dado : dado,
+    		inst_campo : ativo,
+
+
+    	},
+    	success: function(response){
+
+    		document.getElementById('status').style.display="block";
+    	} 
+    })
+}
 var quemsomos;
 var textVolunt;
 
@@ -21,7 +84,6 @@ function menu(id, name){
 		document.getElementById("conteudo").innerHTML =   "";
 		break;**/
 	}
-
 }
 function menualt(id, name){
 	var nome = document.getElementsByName(name);
@@ -40,13 +102,13 @@ function menualt(id, name){
 	}
 	switch (id){
 		case "h.sobre":
-		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><p><textarea id='textalt' class='form-control' rows='5'>" + quemsomos +"</textarea></p>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><big><b>Quem Somos ? </b></big></div><p><textarea id='textalt'  placeholder='informações não fornecidas pela instituição' class='form-control' rows='5'>" + quemsomos +"</textarea></p><div class='input-group-btn'><button type='submit' class='btn btn-default'></span> Salvar</button><button type='reset' class='btn btn-default'></span> Cancelar</button></div>";
 		break;
 		case "h.doa":
 		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>Gostaria de ajudar ?</b></big></div><div class='jumbotrom'><p><big><span class='glyphicons glyphicons-dining-set'></span>Alimento<br><span class='glyphicons glyphicons-t-shirt'></span>Roupa<br><span class='glyphicons glyphicons-education'></span>Materias Didáticos<br><span class='glyphicons glyphicons-soccer-ball'></span>Brinquedos<br><span class='glyphicons glyphicons-usd'></span>Dinheiro<br><span class='glyphicons glyphicons-cleaning'></span>Materiais de Limpeza <br>";
 		break;	
 		case "h.voluntarios":
-		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>O que esperamos dos volutários?</b></big></div><p><textarea id='textalt' class='form-control' rows='5'>"+ textVolunt +"</textarea></p>";
+		document.getElementById("conteudo").innerHTML =  "<div class='row' style='margin-top: 0px'><b>O que esperamos dos volutários?</b></big></div><p><textarea  placeholder='informações não fornecidas pela instituição' id='textalt' class='form-control' rows='5'>"+ textVolunt +"</textarea></p><div class='input-group-btn'><button type='submit' class='btn btn-default'></span> Salvar</button><button type='reset' class='btn btn-default'></span> Cancelar</button></div>";
 		break;
 		/**case "h.contatos":
 		document.getElementById("conteudo").innerHTML =   "";
@@ -163,35 +225,4 @@ function logon()
 	document.getElementById('menucadastro').style.display="none";
 	document.getElementById('menulogout').style.display="block";
 	document.getElementById('menuinstalt').style.display="block";
-}
-
-function postInst(){
-	var nome = $("#nome").val();
-    //var setor = $("#quem").val();
-   // var impactados = $("#Num").val();
-    var endereco = $("#endereco").val();
-    var telefone = $("#insttelefone").val();
-    var email = $("#instemail").val();
-
-    $.ajax
-    ({
-    	type: 'post',
-    	url: 'forminst.php',
-    	data:
-    	{
-    		inst_nome : nome,
-    		inst_endereco : endereco,
-    		inst_telefone : telefone,
-    		inst_email : email
-    		//inst_setor = setor,
-    		//inst_impactados = impactados,
-
-    	},
-    	success: function(response){
-
-    		document.getElementById('status').style.display="block";
-    	} 
-    })
-
-
 }

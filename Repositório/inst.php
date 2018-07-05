@@ -28,7 +28,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a class="navbar-brand" href="#home" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -410px;"  ></a>
+				<a class="navbar-brand" href="index.php" style="padding-top: 0px;"><img src="fotos/logo.png" style="width: 100%; margin-right: -400px;"  ></a>
 				<!--fazer o search ser responsivo-->
 			</div>
 
@@ -41,16 +41,16 @@
 <!-- Nova bara de pesquisa -->
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">											
-					<li><form class="navbar-form navbar-header navbar-right " action="pesquisa.php" method="get">
+					<li><form class="navbar-form navbar-header  " action="pesquisa.php" method="get">
 							<div class="input-group" style="margin-left: 15px; margin-right: 15px;">
-								<input type="search" name="pesquisa" class="form-control" size="45%" placeholder="Procurando a instituição ideal para doar ?" required>
+								<input type="search" name="pesquisa" class="form-control" size="60%" placeholder="Procurando a instituição ideal para doar ?" required>
 									<div class="input-group-btn">
 										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
 										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></button>
 										<!--<form action="pesquisa.php" method="post">-->
 											<ul class="dropdown-menu dropdown-menu-right">
 												<div class="radio" style="padding-left: 10px; padding-right: 10px">
-													<li><label><input type="radio" name="filtro" value="Tudo" checked="checked">Tudo</label>
+													<li><label><input type="radio" name="filtro" value="tudo" checked="checked">Tudo</label>
 													<li><label><input type="radio" name="filtro" value="nome">Nome</label>
 													<li><label><input type="radio" name="filtro" value="endereco">Local</label>
 													<li><label><input type="radio" name="filtro" value="doacoes">Tipo de doação</label>
@@ -62,9 +62,9 @@
 					</li></form>
 <!-- fim da barra de pesquisa-->				
 
-			<li><a href="#home">Ínicio</a></li>
-			<li><a href="#portfolio">Projetos</a></li>
-			<li><a href="#pricing">Quem Somos</a></li>
+		<!--	<li><a href="#home">Ínicio</a></li>-->
+			<li><a href="projetos.php">Projetos</a></li>
+		<!--	<li><a href="#pricing">Quem Somos</a></li>-->
 <!-- amiguinhos que aparecem e desaparecem quando há instiuição logada ou não -->
 			<li id="menuinstalt" style="display:none;"><a href="instalt.php">Perfil</a></li>
 			<li id="menulogout" style="display:none;"><a href="logout.php">Sair</a></li>
@@ -102,9 +102,10 @@
 											</li>										
 											<li>
 												<!--botão que limpa os inputs. Não usei função, ele limpa por html5 não sei se funciona no resto -->
-												<input class="btn btn-danger" name='botao' value='Limpar' >
-												<!--Botao que chama a função de validação -->
-												<div><input class="btn btn-primary" type='submit' name='botao' value='Logar'></div>
+												<div>
+													<input class="btn btn-danger" type='reset' name='botao' value='Limpar'>
+													<input class="btn btn-primary" type='submit' name='botao' value='Entrar' >
+												</div>
 											</li>
 										</form>										
 									</fieldset>
@@ -198,7 +199,6 @@
 
 <!-- Fim da  Nav bar karalhuda -->
 
-
 		<div class="container-fluid">
 			
 			<div class="row content"  style="margin-top:50px">
@@ -213,13 +213,13 @@
 				<div class="col-sm-3" style="padding: 10px 0px; " >
 					
 					<div class="panel panel-default text-center" style="margin-right: 0px;
-    margin-left: 0px;">
+    margin-left: 0px;  	border: solid #dbdbdb;">
 						<div class="panel-heading" >
 							<h1 id="nome">Apae de vila velha</h1>
 						</div>
 						<div class="panel-body">
-							<p id="quem"><strong>Área de atuação: </strong>Auxílio a pessoas com definciência intelectual </p>
-							<p id="Num"><strong>Número de impactados: </strong> Não fornecido </p>
+							<p id="atuacao"><strong>Área de atuação: </strong>Auxílio a pessoas com definciência intelectual </p>
+							<p id="impactados"><strong>Número de impactados: </strong> Não fornecido </p>
 							<p id="endereco"><strong>Endereço: </strong> rua cabo aylson simoes 185 centro 29100320</p>
 							<p id="insttelefone"><strong>Contato: </strong>32992628
 							<p id="instemail"><strong>Email: </strong>ubuntu.vv@gmail.com
@@ -410,8 +410,14 @@ ass="glyphicons glyphicons-lab-alt"></span>n> Remédios
 				if (!$conn) {
 					die("Connection failed: " . mysqli_connect_error());
 				}
+					//garante o utf8
+   mysql_query("SET character_set_results=utf8",$conn);
+   mb_language('uni'); 
+   mb_internal_encoding('UTF-8');
+   mysql_query("set names 'utf8'",$conn);
+   //fim 
 				$nome = $_GET['inst'];
-				$sql = "select nome,textodesc,textovol,email,telefone,endereco,info,fotos from instituicoes where nome like '%$nome%';";
+				$sql = "select nome,textodesc, impactados, atuacao, textovol,email,telefone,endereco,info,fotos from instituicoes where nome like '%$nome%';";
 
 				$result = mysqli_query($conn, $sql);
 				$depois = 'class="box" style="margin-left: 30px;  max-height:240px; ">';
@@ -421,6 +427,7 @@ ass="glyphicons glyphicons-lab-alt"></span>n> Remédios
     // output data of each row
 					//document.getElementById('voluntario').innerHTML = '" .utf8_encode ($row["textovol"]). "' ;
 					//						document.getElementById('info').innerHTML = '" .utf8_encode ($row["info"]). "' ;
+					
 					echo "<span>".$row["nome"]."</span>";
 					while($row = mysqli_fetch_assoc($result)) {
 
@@ -429,10 +436,11 @@ ass="glyphicons glyphicons-lab-alt"></span>n> Remédios
 
 						echo"<script type='text/javascript'>document.getElementById('nome').innerHTML = " .$anome. " ; 
 						document.getElementById('quemss').innerHTML = quemsomos
-						document.getElementById('quem').innerHTML = '<strong>Área de atuação: </strong>" .utf8_encode ($row["textodesc"]). "' ;
+						document.getElementById('atuacao').innerHTML = '<strong>Área de atuação: </strong>" .nl2br(utf8_encode ($row["atuacao"])). "' ;
 						document.getElementById('instemail').innerHTML = '<strong>Email: </strong>" .utf8_encode ($row["email"]). "' ;
 						document.getElementById('insttelefone').innerHTML = '<strong>Telefone: </strong>" .utf8_encode ($row["telefone"]). "' ;
 						document.getElementById('endereco').innerHTML = '<strong>Endereço: </strong>" .utf8_encode ($row["endereco"]). "' ;
+						document.getElementById('impactados').innerHTML = '<strong>Número de Impactados: </strong>" .utf8_encode ($row["impactados"]). "' ;
 						textVolunt = '" .utf8_encode ($row["textovol"]). "' ;
 						quemsomos =  '" .utf8_encode ($row["textodesc"]). "' ;
 						if(quemsomos == ''){

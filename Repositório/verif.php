@@ -4,8 +4,17 @@ $username = "root";
 $password = "";
 $dbname = "ubuntusocial";
 // Create connection
-$conn = mysql_connect($servername, $username, $password, $dbname) or die (mysql_error());;
+$conn = mysql_connect($servername, $username, $password, $dbname) or die (mysql_error());
 define('CHARSET', 'UTF-8');
+
+	//garante o utf8
+   mysql_query("SET character_set_results=utf8",$conn);
+   mb_language('uni'); 
+   mb_internal_encoding('UTF-8');
+   mysql_query("set names 'utf8'",$conn);
+   //fim 
+
+
 $select = mysql_select_db('ubuntusocial') or die (mysql_error());
 ?>
 
@@ -58,9 +67,9 @@ if( $row > 0 )
 	$_SESSION["inst"] = $inst['nomedainstituicao'];
 	$_SESSION['id'] = $id['idinst'];
 	$_serieSESSION = serialize($_SESSION);
-	var_dump($_SESSION);
-	var_dump($inst);
-	var_dump($id);
+	//var_dump($_SESSION);
+	//var_dump($inst);
+	//var_dump($id);
 
 	//echo "Você foi autenticado com sucesso, aguarde um instante";
 	echo "<script>loginsuccessfully()</script>";
